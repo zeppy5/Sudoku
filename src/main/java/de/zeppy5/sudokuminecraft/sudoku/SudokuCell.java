@@ -59,4 +59,15 @@ public class SudokuCell {
         loc.getBlock().setType(material);
     }
 
+    public int getNum() {
+        return num;
+    }
+
+    public Location getLocation() {
+        return loc.clone();
+    }
+
+    public boolean isGenerated() {
+        return generated;
+    }
 }

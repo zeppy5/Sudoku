@@ -1,8 +1,12 @@
 package de.zeppy5.sudokuminecraft.util;
 
-import java.util.Arrays;
-
 public class SudokuGenerator {
+
+    /*
+
+    Algorithm by https://www.geeksforgeeks.org/program-sudoku-generator/
+
+     */
 
     final int[][] mat;
     final int N;
@@ -41,7 +45,7 @@ public class SudokuGenerator {
         return true;
     }
 
-    private void fillBox(int row,int col) {
+    private void fillBox(int row, int col) {
         int num;
         for (int i = 0; i < SRN; i++) {
             for (int j = 0; j < SRN; j++) {
@@ -58,20 +62,20 @@ public class SudokuGenerator {
         return (int) Math.floor((Math.random() * num + 1));
     }
 
-    private boolean CheckIfSafe(int i,int j,int num) {
+    private boolean CheckIfSafe(int i, int j, int num) {
         return (unUsedInRow(i, num) &&
                 unUsedInCol(j, num) &&
                 unUsedInBox(i - i%SRN, j - j%SRN, num));
     }
 
-    private boolean unUsedInRow(int i,int num) {
+    private boolean unUsedInRow(int i, int num) {
         for (int j = 0; j < N; j++)
             if (mat[i][j] == num)
                 return false;
         return true;
     }
 
-    private boolean unUsedInCol(int j,int num) {
+    private boolean unUsedInCol(int j, int num) {
         for (int i = 0; i < N; i++)
             if (mat[i][j] == num)
                 return false;
