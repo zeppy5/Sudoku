@@ -8,14 +8,13 @@ public class SudokuCell {
     private final Location loc;
     private Material material;
     private int num;
-    private boolean generated = true;
+    private final boolean generated;
 
     public SudokuCell(Location loc, int num) {
         this.loc = loc;
         this.num = num;
         this.material = getMaterialByNum(num);
-        if (num == 0)
-            generated = false;
+        generated = num != 0;
         fill();
     }
 
@@ -30,7 +29,7 @@ public class SudokuCell {
             case 7 -> Material.PINK_CONCRETE;
             case 8 -> Material.GRAY_CONCRETE;
             case 9 -> Material.PURPLE_CONCRETE;
-            default -> Material.AIR;
+            default -> Material.GLASS;
         };
     }
 
@@ -52,7 +51,13 @@ public class SudokuCell {
     public void setMaterial(Material material) {
         this.material = material;
         this.num = getNumByMaterial(material);
-        loc.getBlock().setType(material);
+        fill();
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+        this.material = getMaterialByNum(num);
+        fill();
     }
 
     public void fill() {
