@@ -1,5 +1,8 @@
 package de.zeppy5.sudokuminecraft.util;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class SudokuGenerator {
 
     /*
@@ -8,10 +11,12 @@ public class SudokuGenerator {
 
      */
 
-    final int[][] mat;
-    final int N;
-    final int SRN;
-    final int K;
+    private final int[][] mat;
+    private final int N;
+    private final int SRN;
+    private final int K;
+
+    private final int[][] originalMat;
 
     private SudokuGenerator(int N, int K) {
         this.N = N;
@@ -22,11 +27,17 @@ public class SudokuGenerator {
         SRN = (int) SRNd;
 
         mat = new int[N][N];
+        originalMat = new int[N][N];
     }
 
     public void fillValues() {
         fillDiagonal();
         fillRemaining(0, SRN);
+
+        for (int i = 0; i < mat.length; i++) {
+            System.arraycopy(mat[i], 0, originalMat[i], 0, mat[i].length);
+        }
+
         removeKDigits();
     }
 
@@ -140,10 +151,14 @@ public class SudokuGenerator {
         return mat;
     }
 
-    public static int[][] createSudoku() {
+    public int[][] getOriginalMat() {
+        return originalMat;
+    }
+
+    public static List<int[][]> createSudoku() {
         SudokuGenerator sudokuGenerator = new SudokuGenerator(9, 20);
         sudokuGenerator.fillValues();
-        return sudokuGenerator.getMat();
+        return List.of(sudokuGenerator.getMat(), sudokuGenerator.getOriginalMat());
     }
 
 }
