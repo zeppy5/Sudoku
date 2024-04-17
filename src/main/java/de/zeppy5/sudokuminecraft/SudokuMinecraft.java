@@ -1,6 +1,7 @@
 package de.zeppy5.sudokuminecraft;
 
 import de.zeppy5.sudokuminecraft.command.SudokuCommand;
+import de.zeppy5.sudokuminecraft.command.SudokuRulesCommand;
 import de.zeppy5.sudokuminecraft.listener.ChangeBlockListener;
 import de.zeppy5.sudokuminecraft.listener.DoneListener;
 import de.zeppy5.sudokuminecraft.listener.InventoryListener;
@@ -19,6 +20,8 @@ public final class SudokuMinecraft extends JavaPlugin {
         instance = this;
 
         Objects.requireNonNull(getCommand("sudoku")).setExecutor(new SudokuCommand());
+        Objects.requireNonNull(getCommand("sudokurules")).setExecutor(new SudokuRulesCommand());
+
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new ChangeBlockListener(),this);
         pluginManager.registerEvents(new DoneListener(), this);

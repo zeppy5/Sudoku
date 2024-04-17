@@ -3,10 +3,7 @@ package de.zeppy5.sudokuminecraft.sudoku;
 import de.zeppy5.sudokuminecraft.SudokuMinecraft;
 import de.zeppy5.sudokuminecraft.util.SudokuGenerator;
 import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.KeybindComponent;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -54,6 +51,15 @@ public class SudokuManager {
         fillCells();
         spawnLines();
         schedule();
+        showBookMessage();
+    }
+
+    public void showBookMessage() {
+        TextComponent message = new TextComponent("Click here to view the game rules");
+        message.setUnderlined(true);
+        message.setColor(net.md_5.bungee.api.ChatColor.BLUE);
+        message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/sudokurules"));
+        player.spigot().sendMessage(message);
     }
 
     public void spawnLines() {
